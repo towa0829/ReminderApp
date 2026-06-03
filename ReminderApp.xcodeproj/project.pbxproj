@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		8A163CF72FC7271A0019A697 /* Reminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A163CF72FC7271A0019A697 /* ReminderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReminderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		8A163CF92FC7271A0019A697 /* Reminder */ = {
+		8A163CF92FC7271A0019A697 /* ReminderApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Reminder;
+			path = ReminderApp;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		8A163CEE2FC7271A0019A697 = {
 			isa = PBXGroup;
 			children = (
-				8A163CF92FC7271A0019A697 /* Reminder */,
+				8A163CF92FC7271A0019A697 /* ReminderApp */,
 				8A163CF82FC7271A0019A697 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +40,7 @@
 		8A163CF82FC7271A0019A697 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8A163CF72FC7271A0019A697 /* Reminder.app */,
+				8A163CF72FC7271A0019A697 /* ReminderApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8A163CF62FC7271A0019A697 /* Reminder */ = {
+		8A163CF62FC7271A0019A697 /* ReminderApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A163D022FC7271B0019A697 /* Build configuration list for PBXNativeTarget "Reminder" */;
+			buildConfigurationList = 8A163D022FC7271B0019A697 /* Build configuration list for PBXNativeTarget "ReminderApp" */;
 			buildPhases = (
 				8A163CF32FC7271A0019A697 /* Sources */,
 				8A163CF42FC7271A0019A697 /* Frameworks */,
@@ -61,13 +61,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				8A163CF92FC7271A0019A697 /* Reminder */,
+				8A163CF92FC7271A0019A697 /* ReminderApp */,
 			);
-			name = Reminder;
+			name = ReminderApp;
 			packageProductDependencies = (
 			);
 			productName = Reminder;
-			productReference = 8A163CF72FC7271A0019A697 /* Reminder.app */;
+			productReference = 8A163CF72FC7271A0019A697 /* ReminderApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8A163CF22FC7271A0019A697 /* Build configuration list for PBXProject "Reminder" */;
+			buildConfigurationList = 8A163CF22FC7271A0019A697 /* Build configuration list for PBXProject "ReminderApp" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8A163CF62FC7271A0019A697 /* Reminder */,
+				8A163CF62FC7271A0019A697 /* ReminderApp */,
 			);
 		};
 /* End PBXProject section */
@@ -309,7 +309,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8A163CF22FC7271A0019A697 /* Build configuration list for PBXProject "Reminder" */ = {
+		8A163CF22FC7271A0019A697 /* Build configuration list for PBXProject "ReminderApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A163D002FC7271B0019A697 /* Debug */,
@@ -318,7 +318,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A163D022FC7271B0019A697 /* Build configuration list for PBXNativeTarget "Reminder" */ = {
+		8A163D022FC7271B0019A697 /* Build configuration list for PBXNativeTarget "ReminderApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A163D032FC7271B0019A697 /* Debug */,

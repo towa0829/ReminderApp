@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct ReminderApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                ReminderListView()
+            }
         }
+        .modelContainer(for: [ReminderItem.self, ReminderCategory.self])
     }
 }
