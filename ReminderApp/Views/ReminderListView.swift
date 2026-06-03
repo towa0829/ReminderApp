@@ -19,12 +19,13 @@ struct ReminderListView: View {
 
     
     @State private var showAddSheet = false
+
     
     var body: some View {
         List {
             ForEach(categories) { category in
                 Section{
-                    ForEach(category.items) { item in
+                    ForEach(category.items.filter { !($0.isCompleted ?? false) }) { item in
                         RemindRowView(reminder: item)
                     }
                     .onDelete { indexSet in
@@ -34,15 +35,25 @@ struct ReminderListView: View {
                             )
                         }
                     }
+                    
                 } header: {
-                    Text(category.title)
+                    HStack {
+                        Text(category.title)
                         .foregroundStyle(
                             CategoryColor(rawValue: category.color
                                          )?.swiftUIColor ?? .blue
                         )
+                        Spacer()
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "ellipsis")
+                                .foregroundStyle(.white)
+                        }
+                    }
+                    
                 }
             }
-            
             .padding(0)
         }
         .listStyle(.plain)
@@ -56,7 +67,7 @@ struct ReminderListView: View {
                 Image(systemName: "square.and.arrow.up")
             }
             ToolbarItem(placement: .topBarTrailing) {
-                Image(systemName: "ellipsis")
+                Image(systemName: "gearshape")
             }
         }
         .overlay(alignment: .bottomTrailing) {
@@ -76,16 +87,27 @@ struct ReminderListView: View {
             AddView()
         }
         .onAppear {
+            for reminder in reminders {
+                if reminder.title == nil {
+                    reminder.title = "(Untitled)"
+                }
+                if reminder.isCompleted == nil {
+                    reminder.isCompleted = false
+                }
+            }
+
             if categories.isEmpty {
                 let category = ReminderCategory(
                     title: "My Tasks",
-                    color: "blue"
+                    color: "blue",
+                    order: 0
                 )
                 modelContext.insert(category)
 
             }
 
         }
+        
     }
 }
 

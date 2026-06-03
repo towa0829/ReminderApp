@@ -88,8 +88,9 @@ struct AddView: View {
                 ) {
 
                     Button("保存") {
-                        if title.isEmpty { return }
-                        save()
+                        let trimmed = title.trimmingCharacters(in: .whitespacesAndNewlines)
+                        if trimmed.isEmpty { return }
+                        save(trimmedTitle: trimmed)
 
                         dismiss()
                     }
@@ -103,26 +104,30 @@ struct AddView: View {
         }
     }
 
-    private func save() {
+    private func save(trimmedTitle: String) {
 
         if mode == 0 {
 
-            guard let category = selectedCategory
-            else { return }
-            if title.isEmpty { return }
-            category.items.append(
-                ReminderItem(title: title)
+            guard let category = selectedCategory else {
+                return
+            }
+
+            let item = ReminderItem(
+                title: trimmedTitle,
+                isCompleted: false
             )
+
+            modelContext.insert(item)
+
+            category.items.append(item)
 
         } else {
 
-            if title.isEmpty { return }
-            let category =
-                ReminderCategory(
-                    title: title,
-                    color: selectedColor.rawValue,
-                    order: categories.count
-                )
+            let category = ReminderCategory(
+                title: trimmedTitle,
+                color: selectedColor.rawValue,
+                order: categories.count
+            )
 
             modelContext.insert(category)
         }

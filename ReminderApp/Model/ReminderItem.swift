@@ -10,8 +10,8 @@ import SwiftData
 
 @Model
 final class ReminderItem {
-    var title: String
-    var isCompleted: Bool
+    var title: String?
+    var isCompleted: Bool?
     
     init(
         title: String,
