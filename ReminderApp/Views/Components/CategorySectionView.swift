@@ -34,10 +34,7 @@ struct CategorySectionView: View {
                 }
             }
         } header: {
-            CategoryHeaderView(
-                title: category.title,
-                colorName: category.color
-            )
+            CategoryHeaderView(category: category)
         }
     }
 }

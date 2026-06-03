@@ -123,10 +123,11 @@ struct AddView: View {
 
         } else {
 
+            let nextOrder = (categories.map(\.order).max() ?? -1) + 1
             let category = ReminderCategory(
                 title: trimmedTitle,
                 color: selectedColor.rawValue,
-                order: categories.count
+                order: nextOrder
             )
 
             modelContext.insert(category)

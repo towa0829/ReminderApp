@@ -8,26 +8,39 @@
 import SwiftUI
 
 struct CategoryHeaderView: View {
-    let title: String
-    let colorName: String
+    let category: ReminderCategory
+
+    @State private var isModalPresented = false
 
     var body: some View {
         HStack {
-            Text(title)
+            Text(category.title)
                 .foregroundStyle(
-                    CategoryColor(rawValue: colorName)?.swiftUIColor ?? .blue
+                    CategoryColor(rawValue: category.color)?.swiftUIColor ?? .blue
                 )
             Spacer()
             Button {
-                // TODO: category actions
+                isModalPresented = true
             } label: {
                 Image(systemName: "ellipsis")
                     .foregroundStyle(.white)
             }
         }
+        .sheet(isPresented: $isModalPresented) {
+            CategoryActionSheetView(
+                category: category,
+                isPresented: $isModalPresented
+            )
+        }
     }
 }
 
 #Preview {
-    CategoryHeaderView(title: "My Tasks", colorName: "blue")
+    CategoryHeaderView(
+        category: ReminderCategory(
+            title: "My Tasks",
+            color: "blue",
+            order: 0
+        )
+    )
 }

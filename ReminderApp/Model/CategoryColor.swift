@@ -9,25 +9,30 @@ import Foundation
 import SwiftUI
 
 enum CategoryColor: String, CaseIterable {
-    
+
     case blue
     case red
     case green
     case orange
     case purple
-    
+    case pink
+    case yellow
+    case mint
+    case indigo
+    case teal
+
     var swiftUIColor: Color {
         switch self {
-        case .blue:
-            return  .blue
-        case .red:
-            return .red
-        case .green:
-            return .green
-        case .orange:
-            return .orange
-        case .purple:
-            return .purple
+        case .blue: return .blue
+        case .red: return .red
+        case .green: return .green
+        case .orange: return .orange
+        case .purple: return .purple
+        case .pink: return .pink
+        case .yellow: return .yellow
+        case .mint: return .mint
+        case .indigo: return .indigo
+        case .teal: return .teal
         }
     }
 }
