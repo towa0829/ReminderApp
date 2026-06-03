@@ -24,35 +24,7 @@ struct ReminderListView: View {
     var body: some View {
         List {
             ForEach(categories) { category in
-                Section{
-                    ForEach(category.items.filter { !($0.isCompleted ?? false) }) { item in
-                        RemindRowView(reminder: item)
-                    }
-                    .onDelete { indexSet in
-                        for index in indexSet {
-                            modelContext.delete(
-                                category.items[index]
-                            )
-                        }
-                    }
-                    
-                } header: {
-                    HStack {
-                        Text(category.title)
-                        .foregroundStyle(
-                            CategoryColor(rawValue: category.color
-                                         )?.swiftUIColor ?? .blue
-                        )
-                        Spacer()
-                        Button {
-                            
-                        } label: {
-                            Image(systemName: "ellipsis")
-                                .foregroundStyle(.white)
-                        }
-                    }
-                    
-                }
+                CategorySectionView(category: category)
             }
             .padding(0)
         }
@@ -71,17 +43,8 @@ struct ReminderListView: View {
             }
         }
         .overlay(alignment: .bottomTrailing) {
-            Button {
-                showAddSheet = true
-            } label: {
-                Image(systemName: "plus")
-                    .fontWeight(.bold)
-                    .foregroundStyle(Color.white)
-                    .padding()
-                    .background(Color.blue)
-                    .clipShape(Circle())
-            }
-            .padding()
+            AddTaskButton(showAddSheet: $showAddSheet)
+                .padding()
         }
         .sheet(isPresented: $showAddSheet) {
             AddView()
