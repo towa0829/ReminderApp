@@ -22,6 +22,8 @@ struct AddView: View {
     @State private var title = ""
     @State private var selectedCategory: ReminderCategory?
     @State private var selectedColor: CategoryColor = .blue
+    @State private var isDueDateEnabled = false
+    @State private var dueDate = Date()
 
     var body: some View {
 
@@ -46,6 +48,14 @@ struct AddView: View {
                             "タイトル",
                             text: $title
                         )
+                        Toggle("締め切り日を設定", isOn: $isDueDateEnabled)
+                        if isDueDateEnabled {
+                            DatePicker(
+                                "締め切り日",
+                                selection: $dueDate,
+                                displayedComponents: .date
+                            )
+                        }
                         Picker(
                             "カテゴリ",
                             selection: $selectedCategory
@@ -114,7 +124,8 @@ struct AddView: View {
 
             let item = ReminderItem(
                 title: trimmedTitle,
-                isCompleted: false
+                isCompleted: false,
+                dueDate: isDueDateEnabled ? dueDate : nil
             )
 
             modelContext.insert(item)

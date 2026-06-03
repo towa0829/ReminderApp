@@ -36,6 +36,7 @@ struct CategorySectionView: View {
         } header: {
             CategoryHeaderView(category: category)
         }
+        .listSectionSeparator(.hidden)
     }
 }
 

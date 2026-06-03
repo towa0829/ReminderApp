@@ -13,21 +13,60 @@ struct RemindRowView: View {
     let reminder: ReminderItem
     @State private var pendingComplete: DispatchWorkItem?
     @State private var localCompleted: Bool
+    @State private var localDueDate: Date?
 
     init(reminder: ReminderItem) {
         self.reminder = reminder
         _localCompleted = State(initialValue: reminder.isCompleted ?? false)
+        _localDueDate = State(initialValue: reminder.dueDate)
+    }
+
+    private var dueDateText: String? {
+        guard let dueDate = localDueDate else { return nil }
+
+        if Calendar.current.isDateInToday(dueDate) {
+            return "本日締め切り"
+        }
+
+        if dueDate < Date().addingTimeInterval(60 * 60 * 24) {
+            return "本日締め切り"
+        }
+
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter.string(from: dueDate)
+    }
+
+    private var isDueSoon: Bool {
+        guard let dueDate = localDueDate else { return false }
+        return dueDate < Date().addingTimeInterval(60 * 60 * 24)
     }
     
     var body: some View {
-        HStack {
-            Image(systemName: 
-                    localCompleted
-                  ? "checkmark.circle.fill"
-                  : "circle")
-                .padding(.trailing, 4)
-            Text(reminder.title ?? "")
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top, spacing: 10) {
+                Image(systemName:
+                        localCompleted
+                      ? "checkmark.circle.fill"
+                      : "circle")
+                    .padding(.top, 2)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(reminder.title ?? "")
+                    if let dueDateText {
+                        Text(dueDateText)
+                            .font(.caption)
+                            .foregroundStyle(isDueSoon ? .red : .secondary)
+                    }
+                }
+            }
+            Divider()
+                .padding(.leading, 30)
+                .padding(.top, 8)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .listRowSeparator(.hidden)
         .transition(.opacity)
         .onTapGesture {
             let nextValue = !localCompleted

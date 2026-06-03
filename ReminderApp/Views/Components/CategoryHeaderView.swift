@@ -37,8 +37,12 @@ struct CategoryHeaderView: View {
                 }
             } label: {
                 Image(systemName: "ellipsis")
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.primary)
+                    .tint(.primary)
             }
+        }
+        .overlay(alignment: .bottom) {
+            Divider()
         }
         .sheet(isPresented: $isEditSheetPresented) {
             CategoryEditSheetView(
