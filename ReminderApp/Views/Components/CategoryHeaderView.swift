@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CategoryHeaderView: View {
+    @Environment(\.modelContext)
+    private var modelContext
+
     let category: ReminderCategory
 
-    @State private var isModalPresented = false
+    @State private var isEditSheetPresented = false
 
     var body: some View {
         HStack {
@@ -19,17 +23,27 @@ struct CategoryHeaderView: View {
                     CategoryColor(rawValue: category.color)?.swiftUIColor ?? .blue
                 )
             Spacer()
-            Button {
-                isModalPresented = true
+            Menu {
+                Button {
+                    isEditSheetPresented = true
+                } label: {
+                    Label("カテゴリの編集", systemImage: "pencil")
+                }
+
+                Button(role: .destructive) {
+                    modelContext.delete(category)
+                } label: {
+                    Label("カテゴリの削除", systemImage: "trash")
+                }
             } label: {
                 Image(systemName: "ellipsis")
                     .foregroundStyle(.white)
             }
         }
-        .sheet(isPresented: $isModalPresented) {
-            CategoryActionSheetView(
+        .sheet(isPresented: $isEditSheetPresented) {
+            CategoryEditSheetView(
                 category: category,
-                isPresented: $isModalPresented
+                isPresented: $isEditSheetPresented
             )
         }
     }
