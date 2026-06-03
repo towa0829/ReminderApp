@@ -19,6 +19,7 @@ struct ReminderListView: View {
 
     
     @State private var showAddSheet = false
+    @AppStorage("isDarkMode") private var isDarkMode = false
 
     
     var body: some View {
@@ -39,7 +40,19 @@ struct ReminderListView: View {
                 Image(systemName: "square.and.arrow.up")
             }
             ToolbarItem(placement: .topBarTrailing) {
-                Image(systemName: "gearshape")
+                Menu {
+                    Button{
+                        isDarkMode.toggle()
+                    }label: {
+                        if isDarkMode {
+                            Label("ライトモード", systemImage: "sun.max.fill")
+                        } else {
+                            Label("ダークモード", systemImage: "moon.fill")
+                        }
+                    }
+                } label: {
+                    Image(systemName: "gearshape")
+                }
             }
         }
         .overlay(alignment: .bottomTrailing) {
@@ -67,6 +80,10 @@ struct ReminderListView: View {
                 )
                 modelContext.insert(category)
 
+                                        Toggle(isOn: $isDarkMode) {
+                                            Label("ダークモード", systemImage: "moon.fill")
+                                        }
+                                        Divider()
             }
 
         }
